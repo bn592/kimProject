@@ -27,6 +27,7 @@ def loginform(request):
             msg = "아이디 비번 오류"
             return render(request,"login/login.html",{"error":msg})
         return redirect("/login/login")
+
     return render(request,"login/login.html")
 
 def logout(request):
