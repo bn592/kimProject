@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Write</title>
+</head>
+<body>
+<div style="width:450px; margin:auto; background:pink">
+    <h1>Adress 등록폼</h1>
+    <form method="post" action="insert">
+    {% csrf_token %} <!--@csrf_exempt가 없어도 post 방식으로 넘어오면 render라는 값으로 들어왔는지 check 해주는 애? -->
+        <fieldset>
+            <legend>Form 예제</legend>
+            <p>
+                <label for="name">
+                    이름
+                </label>
+                <input type="text" name="name" id="name">
+            </p>
+            <p>
+                <label for="tel">
+                    전화번호
+                </label>
+                <input type="text" name="tel" id="tel">
+            </p>
+            <p>
+                <label for="email">
+                    email
+                </label>
+                <input type="text" name="email" id="email">
+            </p>
+            <p>
+                <label for="address">
+                    address
+                </label>
+                <input type="text" name="address" id="address">
+            </p>
+            <p style="text-align:center">
+                <input type="submit" value="등록" id="addrAddBtn">
+                <input type="button" value="리스트" id="addrListBtn">
+            </p>
+        </fieldset>
+    </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('#addrAddBtn').click(function(){
+        location="write";
+        });
+         $('#addrListBtn').click(function(){
+        location="list";
+        });
+    });
+</script>
+</div>
+</body>
+</html>

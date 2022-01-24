@@ -1,0 +1,58 @@
+{% include "header.html" %}
+<div id="content">
+    <h2>회원 가입  예제 </h2>
+    <form method="post" action="meminsert">
+    {% csrf_token %}
+        <div>
+          <input type="text" name="id" id="id" placeholder="ID">
+          <input type="button" value="중복확인" id="chkBtn">
+        </div>
+        <div>
+            <span id="target"></span>
+        </div>
+        <div>
+            <input type="password" name="pwd" id="pwd" placeholder="비밀번호">
+        </div>
+        <div>
+            <input type="text" name="name" id="name" placeholder="이름">
+        </div>
+        <div>
+            <input type="text" name="tel" id="tel" placeholder="Tel">
+        </div>
+       <div>
+            <input type="text" name="email" id="email" placeholder="Email">
+        </div>
+       <div>
+            <input type="text" name="addr" id="addr" placeholder="Addr">
+        </div>
+        <div>
+            <input type="submit" value="가입하기">
+        </div>
+    </form>
+</div>
+<div id="footer"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+        $('#chkBtn').click(function(){
+            //alert('Test => ' +$('#id').val());
+            //$('target').html('호로롤로');
+            //ajax 형태 자 기억 .
+            $.ajax({
+                url:'memIdchk?id='+$('#id').val(),
+                success:function(data){
+                    console.log('data =>' +data);
+                    if(data == '0'){
+                        $('#target').html('사용가능한 아이디 임당!');
+                        $('#target').css('color','blue');
+                    }else{
+                        $('#target').html('이미 사용중인 아이디 임당!');
+                        $('#target').css('color','red');
+                    }
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+{% include "header.html" %}
+<div id="content">
+    <h2> Survey Result Page</h2>
+    <h3>설문 작성 완료 </h3>
+    <table style="border:1px dotted;">
+        <tr>
+            <th>문항</th>
+            <th>응답수</th>
+            <th>응답비율</th>
+        </tr>
+        {% for row,ans in surveyList %}
+        <input type="hidden" name="ans" class="ans" value="{{ans}}">
+        <input type="hidden" name="sum_num" class="sum_num" value="{{row.sum_num}}">
+        <tr>
+            <td style="border:1px solid;">{{ans}}</td>
+            <td style="border:1px solid; text-align:center">{{row.sum_num}}</td>
+             <td style="border:1px solid;">{{row.rate}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    <div id="chart_donut"></div>
+    <a href="/survey/">Survey Form</a>
+</div>
+<div id="footer"></div>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script>
+    $(function(){
+        let rootlistv = [];
+        for(var i =0; i < $('.ans').length; i++){
+            var ansv = $('.ans').eq(i).val();
+            var sum_numv  = $('.sum_num').eq(i).val();
+           // $('#chart_donut').append(ansv+":"+sum_numv+ "<br>");
+            rootlistv.push([ansv,sum_numv]);
+        }
+
+        /* // test용
+        var chartDate = [
+         ['아름다운 바다와 해변', 551],
+         ['시원 계곡과 팬션',669],
+         ['시원하고 먹을 것이 많은 방',1005]
+    ];
+    */
+
+    console.log(typeof(chartDate));
+    var chart = c3.generate({
+    bindto:'#chart_donut',
+    data: {
+       columns: rootlistv,
+        type: 'pie',
+        onclick: function (d, i) { console.log("onclick", d, i); },
+        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+    }
+  });
+});
+
+</script>
+</body>
+</html>

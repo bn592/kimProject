@@ -1,0 +1,36 @@
+{% include "header.html" %}
+<div id="content">
+    <h2>파일 업로드 리스트 예제 </h2>
+    <div id="wrap">
+    <table>
+    <tr>
+        <td>상품ID</td>
+        <td>상품이미지</td>
+        <td>상품명</td>
+        <td>가격 </td>
+    </tr>
+    <!--
+    {% load static %}
+    {% static "" as baseUrl %}
+    <img src="{{baseUrl}}images/{{e.picture_url}}"
+
+    -->
+    {% for e in productList %}
+    <tr>
+        <td>{{e.product_id}}</td>
+        <td>{{e.picture_url}}
+            {% if e.picture_url != '-' %}
+            <img src="/static/images/{{e.picture_url}}" style="width:100px">
+            {% endif %}
+        </td>
+        <td>{{e.product_name}}</td>
+        <td>{{e.price}} </td>
+    </tr>
+    {% endfor %}
+    </table>
+    <input type="button" value="write" onclick="location='product_write'">
+</div>
+</div>
+<div id="footer"></div>
+</body>
+</html>

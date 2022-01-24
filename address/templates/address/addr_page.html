@@ -1,0 +1,49 @@
+{% comment %}
+has_previous 이전 페이지 유뮤
+previous_page_number 이전 페이지 번호
+paginator.page_range 페이지 리스트 [1,2,3]
+has_next 다음 페이지 유무
+next_page_number 다음 페이지 번호
+page_obj 페이지 처리된 객체
+num_pages
+{% endcomment %}
+
+<div class="row">
+    <div class="col-12">
+        <nav>
+           <ul>
+               {% if addr_list.has_previous  %}
+               <li><!--이전페이지가 있으면 링크를 걸어주고 아니면 그냥 이전페이지로 간다?-->
+               <a href="?=page={{addr_list.previous_page_number}}&searchValue={{searchValue}}">Previous</a>
+               </li>
+               {% else %}
+               <li>Previous</li>
+               {% endif %}
+               <!--page loop : paginator -->
+               {{addr_list.number}}
+               {% for page_number in addr_list.paginator.page_range %}
+               {% if page_number == addr_list.number %}
+               <!--for문을 돌렸을 때 나온 페이지가 현재 페이지라면 링크를 걸지 말고 [] 안에 넣어서 출력.-->
+               <li>[{{page_number}}]</li>
+               {% else %}
+               <li>[<a href=""?=page={{page_number}}&searchValue={{searchValue}}">{{page_number}}</a>]</li>
+               {% endif %}
+               {% endfor %}
+               <!--next page-->
+               {% if addr_list.has_next %}
+               <li>
+                   <a href="?page={{addr_list.next_page_number}}&searchValue={{searchValue}}">Next</a>
+               </li>
+               {% else %}
+               <li>
+                   <a href="#">Next</a>
+               </li>
+               {% endif %}
+               <li>
+                  CurrentPage:{{addr_list.number}}
+                   /Total Page :{{addr_list.paginator.num_pages}}
+               </li>
+           </ul>
+        </nav>
+    </div>
+</div>

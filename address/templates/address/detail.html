@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Address Detail</title>
+</head>
+<body>
+<div style="width:450px; margin:auto; background:pink">
+    <h1>Adrress 상세보기 폼</h1>
+    <form method="post" id="detailForm">
+        {% csrf_token %}
+        <fieldset>
+            <legend>Form 예제</legend>
+            <p>
+                <label for="name">
+                    이름
+                </label>
+                <input type="text" name="name" id="name" value="{{addr.name}}">
+            </p>
+            <p>
+                <label for="tel">
+                    전화번호
+                </label>
+                <input type="text" name="tel" id="tel" value="{{addr.tel}}">
+            </p>
+            <p>
+                <label for="email">
+                    email
+                </label>
+                <input type="text" name="email" id="email" value="{{addr.email}}">
+            </p>
+            <p>
+                <label for="address">
+                    email
+                </label>
+                <input type="text" name="address" id="address" value="{{addr.address}}">
+            </p>
+
+            <p style="text-align:center">
+                <input type="hidden" name="idx" id="idx" value="{{addr.idx}}">
+                <input type="button" value="write" id="addrAddBtn">
+                <input type="button" value="리스트" id="addrListBtn">
+                <input type="button" value="수정" id="addrUpBtn">
+                <input type="button" value="삭제" id="addrDelBtn">
+            </p>
+        </fieldset>
+    </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(function(){
+         $('#addrAddBtn').click(function(){
+            location="write";
+         });
+
+        $('#addrListBtn').click(function(){
+            location="list";
+        });
+        //del,update 핸들링
+        $('#addrDelBtn').click(function(){
+            if(confirm('정말 삭제 하겠습니까?')){
+                $('#detailForm').attr('action','delete').submit();
+            }
+        });
+        $('#addrUpBtn').click(function(){
+            $('#detailForm').attr('action','update').submit();
+        });
+    });
+</script>
+</div>
+</body>
+</html>

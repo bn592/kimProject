@@ -1,0 +1,16 @@
+create table member(
+num number constraint member_num_pk primary key,
+id varchar2(20) constraint member_id_nn not null,
+pwd varchar2(20),
+name varchar2(45),
+email varchar2(45),
+tel varchar2(30),
+addr varchar2(100),
+mdate date,
+constraint member_id_uq unique(id));
+create sequence member_seq
+increment by 1
+start with 1;
+#insert문
+#select문
+#쿼리 작성하고 파이참으로 이렇게 만들어서 제출
